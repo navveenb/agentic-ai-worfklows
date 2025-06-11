@@ -2,7 +2,7 @@
 
 Welcome to the Agentic AI Workflows Gallery—a collection of practical, production-grade examples demonstrating the power and flexibility of agent-based AI and LLM orchestration.
 
-This repository brings together modular, real-world examples that leverage state-of-the-art frameworks such as [CrewAI](https://crewai.com/), [Google Agents Development Kit (ADK)](https://openai.github.io/openai-agents-python/), and [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/) to solve end-to-end tasks with autonomous, tool-using agents.
+This repository brings together modular, real-world examples that leverage state-of-the-art frameworks such as [CrewAI](https://crewai.com/), [Google Agents Development Kit (ADK)](https://github.com/google/adk-python), and [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/) to solve end-to-end tasks with autonomous, tool-using agents.
 
 ---
 
