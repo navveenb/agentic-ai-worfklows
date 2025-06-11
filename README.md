@@ -2,7 +2,7 @@
 
 Welcome to the Agentic AI Workflows Gallery—a collection of practical, production-grade examples demonstrating the power and flexibility of agent-based AI and LLM orchestration.
 
-This repository brings together modular, real-world examples that leverage state-of-the-art frameworks such as [CrewAI](https://crewai.com/) and open-source toolkits to solve end-to-end tasks with autonomous, tool-using agents.
+This repository brings together modular, real-world examples that leverage state-of-the-art frameworks such as [CrewAI](https://crewai.com/), [Google Agents Development Kit (ADK)](https://ai.google.dev/agents/adk), and [OpenAI Agents SDK](https://platform.openai.com/agents) to solve end-to-end tasks with autonomous, tool-using agents.
 
 ---
 
@@ -43,3 +43,44 @@ Each example is organized as a subdirectory containing:
 ```bash
 git clone https://github.com/your-username/agentic-ai-workflows.git
 cd agentic-ai-workflows
+```
+
+### 2. **Browse the examples**
+```bash
+ls
+# Each subfolder is a self-contained workflow example.
+```
+
+### 3. **Run an example**
+- Follow the instructions in each example’s `README.md`.
+- Most require Python 3.9+, and some require OpenAI or other LLM API keys.
+
+---
+
+## ✨ Contributing
+
+Have a workflow to share? Want to demonstrate agent-based RAG, autonomous data pipelines, AI-assisted finance, or other use-cases?
+- Fork this repo
+- Add your example as a new subdirectory
+- Include a clear `README.md` with setup and workflow description
+- Submit a pull request!
+
+---
+
+## 📚 References
+
+- [CrewAI Documentation](https://docs.crewai.com/)
+- [Google Agents Development Kit (ADK)](https://ai.google.dev/agents/adk)
+- [OpenAI Agents SDK](https://platform.openai.com/agents)
+- [OpenAI Platform](https://platform.openai.com/)
+- [Zerodha Kite MCP](https://github.com/zerodha/kite-mcp-server)
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+*This repository is a showcase for education, rapid prototyping, and research in agentic AI. Not for production trading or investment advice.*
