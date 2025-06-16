@@ -15,26 +15,20 @@ warnings.filterwarnings("ignore")
 load_dotenv('.env')  # Adjust path if your .env is elsewhere
 
 # === Config ===
-MCP_SSE_URL = os.environ.get("MCP_SSE_URL", "https://mcp.kite.trade/sse")  # Can be set in .env or fallback to default
-
-# Securely load all API keys from environment
+MCP_SSE_URL = os.environ.get("MCP_SSE_URL", "https://mcp.kite.trade/sse")
 google_api_key = os.environ.get("GOOGLE_API_KEY")
-
 if not google_api_key:
     raise ValueError("Missing GOOGLE_API_KEY. Set it in your environment or .env file.")
-
 os.environ["GOOGLE_API_KEY"] = google_api_key
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "False"
 
-# --- Step 1: Agent Definition ---
 async def get_agent_async():
     toolset = MCPToolset(
         connection_params=SseServerParams(
             url=MCP_SSE_URL,
-            headers={},  # Add auth headers if needed
+            headers={},
         ),
     )
-
     root_agent = LlmAgent(
         model='gemini-2.0-flash',
         name='zerodha_portfolio_assistant',
@@ -47,30 +41,13 @@ async def get_agent_async():
     )
     return root_agent, toolset
 
-# --- Defensive Event Printer ---
-def print_event(event, label=None):
-    if label:
-        print(label)
-    # Check for .content and .parts (defensive)
+def extract_text_from_event(event):
     if getattr(event, "content", None) and getattr(event.content, "parts", None):
         text = getattr(event.content.parts[0], "text", None)
         if text:
-            print(text)
             return text
-        else:
-            print("Event content has no text part. Full event:")
-            print(event)
-            return None
-    # Check for tool function call action
-    if getattr(event, "actions", None) and getattr(event.actions, "function_call", None):
-        print("Event was a function_call (tool usage):")
-        print(event.actions.function_call)
-        return None
-    print("Event has no content or text parts. Full event:")
-    print(event)
     return None
 
-# --- Step 2: Main Orchestration ---
 async def async_main():
     session_service = InMemorySessionService()
     artifacts_service = InMemoryArtifactService()
@@ -88,19 +65,16 @@ async def async_main():
     )
 
     try:
-        # --- Step 1: Login (get login URL) ---
+        # Step 1: Login (get login URL)
         login_query = "Authenticate and provide the login URL for Zerodha."
-        print(f"\nUser: {login_query}")
         content = types.Content(role='user', parts=[types.Part(text=login_query)])
-
         events_async = runner.run_async(
             session_id=session.id, user_id=session.user_id, new_message=content
         )
         login_url = None
         async for event in events_async:
-            result = print_event(event)
+            result = extract_text_from_event(event)
             if event.is_final_response() and result:
-                # Try to extract login URL for user to open
                 import re
                 match = re.search(r'(https?://[^\s)]+)', result)
                 if match:
@@ -109,22 +83,20 @@ async def async_main():
             print("No login URL found. Exiting.")
             await toolset.close()
             return
-        print(f"\nOpen this URL in your browser and complete login:\n{login_url}\n")
+        print(f"Open this URL in your browser and complete login:\n{login_url}\n")
         import webbrowser
         webbrowser.open(login_url)
         input("Press Enter after completing login...")
 
-        # --- Step 2: Fetch holdings ---
+        # Step 2: Fetch holdings
         holdings_query = "Show my current stock holdings."
-        print(f"\nUser: {holdings_query}")
         content = types.Content(role='user', parts=[types.Part(text=holdings_query)])
-
         events_async = runner.run_async(
             session_id=session.id, user_id=session.user_id, new_message=content
         )
         holdings_raw = None
         async for event in events_async:
-            result = print_event(event)
+            result = extract_text_from_event(event)
             if event.is_final_response() and result:
                 holdings_raw = result
 
@@ -133,7 +105,7 @@ async def async_main():
             await toolset.close()
             return
 
-        # --- Step 3: Portfolio Analysis ---
+        # Step 3: Portfolio Analysis
         analysis_prompt = f"""
 You are a senior portfolio analyst.
 
@@ -151,24 +123,24 @@ Raw holdings:
 
 For each section, include concise, actionable insights (no generic explanations). Use only the provided data.
 """
-        print("\nSubmitting analysis prompt to LLM agent...\n")
         content = types.Content(role='user', parts=[types.Part(text=analysis_prompt)])
-
         events_async = runner.run_async(
             session_id=session.id, user_id=session.user_id, new_message=content
         )
         async for event in events_async:
-            print_event(event, label="\n=== Portfolio Analysis Report ===\n" if event.is_final_response() else None)
+            text = extract_text_from_event(event)
+            if event.is_final_response() and text:
+                print("\n=== Portfolio Analysis Report ===\n")
+                print(text)
+                break
 
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
-        print("\nClosing MCP server connection...")
         try:
             await toolset.close()
-        except Exception as e:
-            print("Error during MCP toolset cleanup:", e)
-        print("Cleanup complete.")
+        except Exception:
+            pass
 
 if __name__ == '__main__':
     try:
