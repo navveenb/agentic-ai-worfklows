@@ -5,7 +5,7 @@ This script demonstrates how to interact with the Zerodha Kite MCP server using 
 retrieve portfolio holdings, and perform LLM-based portfolio analysis—all within a modular,
 reproducible Python workflow.
 
-Author: [Your Name]
+Author: Navveen Balani
 License: MIT
 """
 
