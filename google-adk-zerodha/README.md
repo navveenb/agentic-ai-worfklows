@@ -118,5 +118,3 @@ MIT
 
 ---
 
-**Filename:** `portfolio_analysis.py`  
-**Folder:** `google-adk-zerodha`
