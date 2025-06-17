@@ -41,7 +41,7 @@ This project demonstrates how to automate portfolio retrieval and analysis using
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/google-adk-zerodha.git
+git clone https://github.com/navveenb/agentic-ai-worfklows.git
 cd google-adk-zerodha
 ```
 
