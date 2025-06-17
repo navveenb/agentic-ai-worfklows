@@ -43,7 +43,7 @@ Each example is organized as a subdirectory containing:
 
 ### 1. **Clone this repository**
 ```bash
-git clone https://github.com/your-username/agentic-ai-workflows.git
+git clone https://github.com/navveenb/agentic-ai-worfklows.git
 cd agentic-ai-workflows
 ```
 
