@@ -24,6 +24,7 @@ With agentic workflows, you can build systems that:
 |------------------------------------|---------------------------------------------------------------|
 | [`zerodha-portfolio-crewai`](./zerodha-portfolio-crewai) | Automates portfolio retrieval & analysis via CrewAI + Zerodha Kite MCP. LLM-powered report generation. |
 | [`google-adk-zerodha`](./google-adk-zerodha) | Automates portfolio retrieval & analysis via Google ADK + Zerodha Kite MCP. LLM-powered report generation. |
+| [`software-migration-plan-crewai`](./software-migration-plan-crewai) | Java code migration using Crew AI + Gemini |
 | _More coming soon!_                | More examples for finance, coding, RAG, or vertical domains coming soon. |
 
 ---
