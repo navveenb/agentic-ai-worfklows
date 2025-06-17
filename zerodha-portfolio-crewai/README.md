@@ -42,7 +42,7 @@ This repository demonstrates how to automate portfolio retrieval and analysis us
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/zerodha-portfolio-crewai.git
+git clone https://github.com/navveenb/agentic-ai-worfklows.git
 cd zerodha-portfolio-crewai
 ```
 
