@@ -7,6 +7,7 @@ This project uses [CrewAI](https://docs.crewai.com/) and Google's [Gemini Model]
 ## 🚀 What It Does
 
 🔎 **Analyzes legacy Java code**  
+
 🧠 **Uses Gemini LLM** to identify:
 - Legacy/deprecated syntax
 - Compatibility issues with Java 17+
