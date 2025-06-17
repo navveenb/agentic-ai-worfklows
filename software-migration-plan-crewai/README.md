@@ -44,7 +44,7 @@ This project uses [CrewAI](https://docs.crewai.com/) and Google's [Gemini Model]
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/agentic-ai-worfklows.git
+git clone https://github.com/navveenb/agentic-ai-worfklows.git
 cd software-migration-plan-crewai
 ```
 
