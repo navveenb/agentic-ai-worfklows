@@ -1,6 +1,6 @@
 # 🧠 Java Migration Plan with CrewAI + Gemini
 
-This project uses [CrewAI](https://docs.crewai.com/) and Google's [Gemini Pro](https://makersuite.google.com/) via **AI Studio API** to automate Java code modernization.
+This project uses [CrewAI](https://docs.crewai.com/) and Google's [Gemini Model](https://aistudio.google.com//) via **Google AI Studio** to automate Java code modernization.
 
 ---
 
